@@ -35,9 +35,12 @@ func TestProbeHTTPS(t *testing.T) {
 	defer server.Close()
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			InsecureSkipVerify: false,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				InsecureSkipVerify: false,
+			},
+			Renegotiation: "never",
 		},
 	}
 
@@ -77,8 +80,10 @@ func TestProbeHTTPSTimeout(t *testing.T) {
 	defer server.Close()
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile: caFile,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile: caFile,
+			},
 		},
 	}
 
@@ -105,9 +110,11 @@ func TestProbeHTTPSInvalidName(t *testing.T) {
 	defer server.Close()
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			InsecureSkipVerify: false,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				InsecureSkipVerify: false,
+			},
 		},
 	}
 
@@ -139,9 +146,11 @@ func TestProbeHTTPSNoScheme(t *testing.T) {
 	defer server.Close()
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			InsecureSkipVerify: false,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				InsecureSkipVerify: false,
+			},
 		},
 	}
 
@@ -186,10 +195,12 @@ func TestProbeHTTPSServerName(t *testing.T) {
 	}
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			InsecureSkipVerify: false,
-			ServerName:         u.Hostname(),
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				InsecureSkipVerify: false,
+				ServerName:         u.Hostname(),
+			},
 		},
 	}
 
@@ -263,11 +274,13 @@ func TestProbeHTTPSClientAuth(t *testing.T) {
 	defer os.Remove(keyFile)
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			CertFile:           certFile,
-			KeyFile:            keyFile,
-			InsecureSkipVerify: false,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				CertFile:           certFile,
+				KeyFile:            keyFile,
+				InsecureSkipVerify: false,
+			},
 		},
 	}
 
@@ -327,11 +340,13 @@ func TestProbeHTTPSClientAuthWrongClientCert(t *testing.T) {
 	defer os.Remove(keyFile)
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			CertFile:           certFile,
-			KeyFile:            keyFile,
-			InsecureSkipVerify: false,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				CertFile:           certFile,
+				KeyFile:            keyFile,
+				InsecureSkipVerify: false,
+			},
 		},
 	}
 
@@ -365,9 +380,11 @@ func TestProbeHTTPSExpired(t *testing.T) {
 	defer server.Close()
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			InsecureSkipVerify: false,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				InsecureSkipVerify: false,
+			},
 		},
 	}
 
@@ -402,9 +419,11 @@ func TestProbeHTTPSExpiredInsecure(t *testing.T) {
 	defer server.Close()
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			InsecureSkipVerify: true,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				InsecureSkipVerify: true,
+			},
 		},
 	}
 
@@ -455,9 +474,11 @@ func TestProbeHTTPSProxy(t *testing.T) {
 	}
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile:             caFile,
-			InsecureSkipVerify: false,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile:             caFile,
+				InsecureSkipVerify: false,
+			},
 		},
 		HTTPS: config.HTTPSProbe{
 			// Test with a bad proxy url first
@@ -517,8 +538,10 @@ func TestProbeHTTPSOCSP(t *testing.T) {
 	defer server.Close()
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile: caFile,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile: caFile,
+			},
 		},
 	}
 
@@ -598,8 +621,10 @@ func TestProbeHTTPSVerifiedChains(t *testing.T) {
 	defer server.Close()
 
 	module := config.Module{
-		TLSConfig: pconfig.TLSConfig{
-			CAFile: caFile,
+		ETLSConfig: config.ExtendedTLSConfig{
+			TLSConfig: pconfig.TLSConfig{
+				CAFile: caFile,
+			},
 		},
 	}
 

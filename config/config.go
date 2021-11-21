@@ -63,12 +63,19 @@ type Config struct {
 
 // Module configures a prober
 type Module struct {
-	Prober     string           `yaml:"prober,omitempty"`
-	Timeout    time.Duration    `yaml:"timeout,omitempty"`
-	TLSConfig  config.TLSConfig `yaml:"tls_config,omitempty"`
-	HTTPS      HTTPSProbe       `yaml:"https,omitempty"`
-	TCP        TCPProbe         `yaml:"tcp,omitempty"`
-	Kubernetes KubernetesProbe  `yaml:"kubernetes,omitempty"`
+	Prober     string            `yaml:"prober,omitempty"`
+	Timeout    time.Duration     `yaml:"timeout,omitempty"`
+	ETLSConfig ExtendedTLSConfig `yaml:"tls_config,omitempty"`
+	HTTPS      HTTPSProbe        `yaml:"https,omitempty"`
+	TCP        TCPProbe          `yaml:"tcp,omitempty"`
+	Kubernetes KubernetesProbe   `yaml:"kubernetes,omitempty"`
+}
+
+// Extend Prometheus TLS Config to support
+// renegotiation option
+type ExtendedTLSConfig struct {
+	config.TLSConfig `yaml:",inline"`
+	Renegotiation    string `yaml:"renegotiation,omitempty"`
 }
 
 // TCPProbe configures a tcp probe

@@ -18,7 +18,7 @@ import (
 
 // ProbeTCP performs a tcp probe
 func ProbeTCP(ctx context.Context, logger log.Logger, target string, module config.Module, registry *prometheus.Registry) error {
-	tlsConfig, err := newTLSConfig(target, registry, &module.TLSConfig)
+	tlsConfig, err := newTLSConfig(target, registry, &module.ETLSConfig.TLSConfig)
 	if err != nil {
 		return err
 	}

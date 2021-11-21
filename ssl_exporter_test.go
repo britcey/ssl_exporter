@@ -29,8 +29,8 @@ func TestProbeHandler(t *testing.T) {
 		Modules: map[string]config.Module{
 			"https": config.Module{
 				Prober: "https",
-				TLSConfig: pconfig.TLSConfig{
-					CAFile: caFile,
+				ETLSConfig: config.ExtendedTLSConfig{
+					TLSConfig: pconfig.TLSConfig{CAFile: caFile},
 				},
 			},
 		},

@@ -18,6 +18,13 @@ func newTLSConfig(target string, registry *prometheus.Registry, pTLSConfig *pcon
 		return nil, err
 	}
 
+<<<<<<< Updated upstream
+=======
+	// while generally less-secure, supporting renegotiation for the purposes of
+	// checking certificate expiration is low-risk
+	// tlsConfig.Renegotiation = tls.RenegotiateFreelyAsClient
+
+>>>>>>> Stashed changes
 	if tlsConfig.ServerName == "" && target != "" {
 		targetAddress, _, err := net.SplitHostPort(target)
 		if err != nil {
